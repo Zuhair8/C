@@ -1,0 +1,737 @@
+1. /* Program to print sum of digits of a given number */
+#include <stdio.h>
+int main()
+{
+    int n,i,sum=0,rem;
+    printf("Enter the number:");
+    scanf("%d",&n);
+    
+    while(n>0)
+    {
+        rem=n%10;
+        sum+=rem;
+        n/=10;
+    }
+    printf("Sum of digits= %d",sum);
+    return 0;
+}
+
+2. /*Program to check if a number is prime or not*/
+#include <stdio.h>
+int check_prime(int a)
+{
+    int i;
+    for(i=2;i<a;i++)
+    {
+        if (a%i==0)
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+int main()
+{
+    int a,b;
+    printf("Enter the number: ");
+    scanf("%d",&a);
+    b=check_prime(a);
+    
+    if (b==0)
+    {
+        printf("%d is not a prime number",a);
+    }
+    else if (b==1)
+    {
+        printf("%d is a prime number",a);    
+    }
+}
+
+3. /*Program to check if a number is odd or even*/
+#include <stdio.h>
+int main()
+{
+    int n;
+    printf("Enter the number: ");
+    scanf("%d",&n);
+    if (n%2==0)
+    {
+        printf("%d is an even number",n);
+    }
+    else
+    {
+        printf("%d is an odd number",n);
+    }
+}
+
+4. /*Program to print the sum of the series 1+2+4+7+11+16...*/
+#include <stdio.h>
+int main()
+{
+    int n,i,term=1,sum=0;
+    printf("Enter the number of terms in the series: ");
+    scanf("%d",&n);
+    
+    for (i=1;i<=n;i++)
+    {
+        sum=sum+term;
+        term=term+i;
+        printf("%d \t",term);
+    }
+    printf("\nSum of the given series upto %d terms = %d ",n,sum);
+    return 0;
+}
+
+5. /*Program to print given number of terms of a Fibonacci series*/
+#include <stdio.h>
+int main()
+{
+    int i,n,x=0,y=1,sum=0;
+    printf("Enter the number of terms in the series: ");
+    scanf("%d",&n);
+    for(i=1;i<=n;i++)
+    {h
+        sum=x+y;
+        x=y;
+        y=sum;
+        printf("%d \t",sum);
+    }
+    return 0;
+}
+
+6. /*Insertion Sort*/
+#include <stdio.h>
+
+void print_array(int *a, int n)
+{
+    int i;
+    for (i=0;i<n;i++)
+    {
+        printf("a[%d]= %d \t",i,a[i]);
+    }
+    printf("\n\n");
+}
+
+void insertion_sort(int *a, int n)
+{
+    int i,j,key;
+    for (j=1;j<n;j++)
+    {
+        key=a[j];
+        i=j-1;
+        while(i>=0 && a[i]>key)
+        {
+            a[i+1]=a[i];
+            i=i-1;
+        }
+        a[i+1]=key;
+    }
+}
+
+int main()
+{
+    int a[8]={6,5,3,1,8,7,2,4};
+    int n=8;
+    
+    print_array(a,n);
+    insertion_sort(a,n);
+    print_array(a,n);
+}
+
+7. /*Merge Sort*/
+#include <stdio.h>
+void print_array(int *a, int n)
+{
+    int i;
+    for (i=0;i<n;i++)
+    {
+        printf("a[%d] = %d \t ",i,a[i]);
+    }
+    printf("\n\n");
+}
+void merge_sort(int *a, int p, int r)
+{
+    if (r>p)
+    {
+        int q=(p+r)/2;
+        merge_sort(a,p,q);
+        merge_sort(a,q+1,r);
+        merge(a,p,q,r);
+    }
+}
+void merge(int *a, int p, int q, int r)
+{
+    int i,j,k,b[10];
+    i=p;
+    j=q+1;
+    k=p;
+    while (i<=q && j<=r)
+    {
+        if (a[i]>a[j])
+        {
+            b[k]=a[j];
+            j++;
+            k++;
+        }
+        else 
+        {
+            b[k]=a[i];
+            i++;
+            k++;
+        }
+    }
+    while (i<=q)
+    {
+        b[k]=a[i];
+        i++;
+        k++;
+    }
+    while (j<=r)
+    {
+        b[k]=a[j];
+        j++;
+        k++;
+    }
+    for (i=p;i<=r;i++)
+    {
+        a[i]=b[i];
+    }
+    
+}
+int main()
+{
+    int a[]={6,5,3,1,8,7,2,4};
+    int n=8;
+    print_array(a,n);
+    merge_sort(a,0,7);
+    print_array(a,n);
+}
+
+8. /*Bubble Sort*/
+#include <stdio.h>
+void print_array(int *a, int n)
+{
+    int i;
+    for (i=0;i<n;i++)
+    {
+        printf("a[%d] = %d\t",i,a[i]);
+    }
+    printf("\n\n");
+}
+
+void bubble(int *a, int n)
+{
+    int i,j,temp;
+    for (i=0;i<n-1;i++)
+    {
+        for (j=0;j<n-1-i;j++)
+        {
+            if (a[j]>a[j+1])
+            {
+                temp=a[j];
+                a[j]=a[j+1];
+                a[j+1]=temp;
+            }
+        }
+    }
+}
+int main()
+{
+    int a[]={6,5,3,1,8,7,2,4};
+    int n=8;
+    print_array(a,n);
+    bubble(a,n);
+    print_array(a,n);
+}
+
+9. /*Quick Sort*/
+#include <stdio.h>
+void print_array(int *a, int n)
+{
+    int i;
+    for (i=0;i<n;i++)
+    {
+        printf("a[%d] = %d\t",i,a[i]);
+    }
+    printf("\n\n");
+}
+void quick_sort(int *a, int p, int q)
+{
+    int partition_index;
+    if(p<q)
+    {
+        partition_index=partition(a,p,q);
+        quick_sort(a,p,partition_index-1);
+        quick_sort(a,partition_index+1,q);
+    }
+}
+int partition(int *a, int p, int q)
+{
+    int i,j,pivot,temp;
+    i=p+1;
+    pivot=a[p];
+    j=q;
+    
+    do{
+        while(a[i]<=pivot)
+        i++;
+    
+        while(a[j]>pivot)
+        j--;
+    
+        if (i<j)
+        {
+            temp=a[i];
+            a[i]=a[j];
+            a[j]=temp;
+        }
+    }while (i<j);
+    
+    temp=a[p];
+    a[p]=a[j];
+    a[j]=temp;
+    
+    return j;
+}
+int main()
+{
+    int a[]={6,5,3,1,8,7,2,4};
+    int n=8;
+    
+    print_array(a,n);
+    quick_sort(a,0,n-1);
+    print_array(a,n);
+}
+
+10. /*Selection Sort*/
+#include <stdio.h>
+void print_array(int *a, int n)
+{
+    int i;
+    for (i=0;i<n;i++)
+    {
+        printf("a[%d] = %d\t",i,a[i]);
+    }
+    printf("\n\n");
+}
+void selection_sort(int *a,int n)
+{
+    int i,j,temp;
+    
+    for (i=0;i<n-1;i++)
+    {
+        for (j=i+1;j<n;j++)
+        {
+            if (a[i]>a[j] && i!=j)
+            {
+                temp=a[i];
+                a[i]=a[j];
+                a[j]=temp;
+            }
+        }
+    }
+}
+int main()
+{
+    int a[]={6,5,3,1,8,7,2,4};
+    int n=8;
+    
+    print_array(a,n);
+    selection_sort(a,n);
+    print_array(a,n);
+}
+
+11. /*Singly linked list*/
+#include <stdio.h>
+#include <stdlib.h>
+struct node
+{
+    int info;
+    struct node *link;
+};
+
+void display(struct node *head)
+{
+    struct node *p;
+    if (head==NULL)
+    {
+        printf("List is empty.");
+        return ;
+    }
+    
+    p=head;
+    
+    while(p!=NULL)
+    {
+        printf("%d\t",p->info);
+        p=p->link;
+    }
+}
+
+struct node *insert_at_beg(struct node *head, int data)
+{
+    struct node *temp;
+    temp=(struct node *)malloc(sizeof (struct node));
+    temp->info=data;
+    temp->link=head;
+    head=temp;
+    
+    return head;
+}
+
+struct node *insert_at_end(struct node *head, int data)
+{
+    struct node *p,*temp;
+    temp=(struct node *)malloc(sizeof(struct node));
+    temp->info=data;
+    temp->link=NULL;
+    p=head;
+    
+    if(p)
+    {
+        while(p->link!=NULL)
+        p=p->link;
+        p->link=temp;
+    }
+    
+    else
+    {
+        head=temp;
+        return head;
+    }
+}
+
+struct node *count(struct node *head)
+{
+    int count=0;
+    struct node *p;
+    
+    p=head;
+    if (p)
+    {
+        while(p!=NULL)
+        {
+            p=p->link;
+            count++;
+        }
+    }
+    
+    printf("The no. of elements in the list are: %d",count);
+}
+
+struct node *search(struct node *head, int data)
+{
+    int pos=1;
+    struct node *p;
+    
+    p=head;
+    
+    if (p)
+    {
+        while(p!=NULL)
+        {
+            if(p->info==data)
+            {
+                printf("Element %d exits in the list and at position %d",data,pos);
+                return 0;
+            }
+            p=p->link;
+            pos++;
+        }
+        printf("Element %d does not exist in the list",data);
+    }
+}
+
+
+struct node *del(struct node *head, int data)
+{
+    struct node *temp,*p;
+    if (head==NULL)
+    {
+        printf("List is empty.\n");
+    }
+    
+    if (head->info==data)
+    {
+        temp=head;
+        head=head->link;
+        free (temp);
+        return head;
+    }
+    p=head;
+    while(p->link!=NULL)
+    {
+        if(p->link->info==data)
+        {
+            temp=p->link;
+            p->link=temp->link;
+            free (temp);
+            return head;
+        }
+        p=p->link;
+    }
+    printf("Element %d not found \n",data);
+    return head;
+}
+
+int main()
+{
+    struct node *head,*second,*third,*fourth;
+    
+    head=(struct node *)malloc(sizeof (struct node));
+    second=(struct node *)malloc(sizeof (struct node));
+    third=(struct node *)malloc(sizeof (struct node));
+    fourth=(struct node *)malloc(sizeof (struct node));
+    
+    head->info=10;
+    head->link=second;
+    
+    second->info=20;
+    second->link=third;
+    
+    third->info=30;
+    third->link=fourth;
+    
+    fourth->info=40;
+    fourth->link=NULL;
+    
+    printf("Original List is:- \n\n");
+    
+    display(head);
+    
+    printf("\n");
+    
+    head=insert_at_beg(head,50);
+    
+    printf("List after insertion at beginning:- \n\n");
+    
+    display(head);
+    
+    printf("\n");
+    
+    insert_at_end(head,60);
+    
+    printf("List after insertion at end:- \n\n");
+    
+    display(head);
+    
+    printf("\n");
+    
+    del(head,20);
+    
+    printf("List after deletion:- \n\n");
+    
+    display(head);
+    
+    printf("\n\n");
+    
+    count(head);
+    
+    printf("\n\n");
+    
+    search(head,60);
+    
+    return 0;
+}
+
+12. /*Doubly linked list*/
+#include <stdio.h>
+#include <stdlib.h>
+
+struct node
+{
+    int info;
+    struct node *prev;
+    struct node *next;
+};
+
+struct node *display(struct node *head)
+{
+    struct node *p;
+    if(head==NULL)
+    {
+        printf("Linked list is empty.");
+    }
+    
+    p=head;
+    
+    while(p!=NULL)
+    {
+        printf("%d \t",p->info);
+        p=p->next;
+    }
+}
+
+struct node *insert_at_beg(struct node *head, int data)
+{
+    struct node *temp;
+    
+    temp=(struct node *)malloc(sizeof(struct node));
+    temp->info=data;
+    temp->prev=NULL;
+    temp->next=head;
+    head=temp;
+        
+    return head;
+}
+
+struct node *insert_after_given_node(struct node *head, int data, int item)
+{
+    struct node *temp, *p;
+    
+    temp=(struct node *)malloc(sizeof(struct node));
+    temp->info=item;
+    
+    p=head;
+    
+    while(p!=NULL)
+    {
+        if (p->info==data)
+        {
+            temp->prev=p;
+            temp->next=p->next;
+            if(p->next!=NULL)
+            p->next->prev=temp;
+            p->next=temp;
+            return head;
+        }
+        p=p->next;
+    }
+    printf("Element %d does not exist in the linked list",data);
+    return head;
+}
+
+struct node *insert_at_end(struct node *head, int data)
+{
+    struct node *p, *temp;
+    
+    temp=(struct node *)malloc(sizeof(struct node));
+    temp->info=data;
+    
+    p=head;
+    
+    if (p)
+    {
+        while(p->next!=NULL)
+        p=p->next;
+        p->next=temp;
+        temp->next=NULL;
+    }
+    else
+    {
+        head=temp;
+        head->next=NULL;
+        return head;
+        
+    }
+}
+
+struct node *count(struct node *head)
+{
+    struct node *p;
+    
+    int count=0;
+    
+    p=head;
+    
+    if(p)
+    {   while(p!=NULL)
+        {
+            p=p->next;
+            count++;
+        }
+        printf("No. of elemnts present in the linked list are: %d",count);
+    }
+}
+
+struct node *search(struct node *head, int data)
+{
+    struct node *p;
+    
+    int pos=1;
+    
+    p=head;
+    
+    while(p!=NULL)
+    {
+        if(p->info==data)
+        {
+            printf("Element %d found at position %d",data,pos);
+            return 0;
+        }
+        p=p->next;
+        pos++;
+    }
+    printf("Element %d does not exist in the linked list",data);
+}
+
+int main()
+{
+    struct node *head,*second,*third,*fourth;
+    
+    head=(struct node *)malloc(sizeof (struct node));
+    second=(struct node *)malloc(sizeof (struct node));
+    third=(struct node *)malloc(sizeof (struct node));
+    fourth=(struct node *)malloc(sizeof (struct node));
+    
+    head->info=10;
+    head->prev=NULL;
+    head->next=second;
+    
+    second->info=20;
+    second->prev=head;
+    second->next=third;
+    
+    third->info=30;
+    third->prev=second;
+    third->next=fourth;
+    
+    fourth->info=40;
+    fourth->prev=third;
+    fourth->next=NULL;
+    
+    printf("Original Linked list is: ");
+    
+    display(head);
+    
+    printf("\n");
+    
+    head=insert_at_beg(head,50);
+    
+     printf("List after insertion at beginning: ");
+    
+    display(head);
+    
+    printf("\n");
+    
+    insert_after_given_node(head,10,70);
+    
+    printf("List after insertion after given node: ");
+    
+    display(head);
+    
+    printf("\n");
+    
+    insert_at_end(head,60);
+    
+    printf("List after insertion at end: ");
+    
+    display(head);
+    
+    printf("\n");
+    
+    count(head);
+    
+    printf("\n");
+    
+    search(head,20);
+    
+    printf("\n");
+    
+    
+}    
+
+
+
+
+
